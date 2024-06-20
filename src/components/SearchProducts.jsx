@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 
 const SearchProducts = () => {
@@ -16,9 +16,10 @@ const SearchProducts = () => {
 
   const fetchProducts = async (search) => {
     try {
-      const response = await axios.get("https://fruiterer-server2.onrender.com/fruits");
-      const filteredProducts = response.data.filter(product => {
-        const productTitle = product.title || ""; // Default to an empty string if product.title is undefined
+      const response = await fetch("https://fruiterer-server2.onrender.com/fruits");
+      const data = await response.json();
+      const filteredProducts = data.filter(product => {
+        const productTitle = product?.title || ""; // Default to an empty string if product.title is undefined
         return productTitle.toLowerCase().includes(search.toLowerCase());
       });
       setProducts(filteredProducts);
@@ -26,7 +27,7 @@ const SearchProducts = () => {
       console.error("Error fetching products:", error);
     }
   };
-                                                      
+
   return (
     <div className="min-h-screen w-[1200px] mx-auto">
       <h2 className="text-center uppercase font-bold underline mt-5">Products</h2>
