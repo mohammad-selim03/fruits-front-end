@@ -26,7 +26,7 @@ const SearchProducts = () => {
       console.error("Error fetching products:", error);
     }
   };
-
+                                                      
   return (
     <div className="min-h-screen w-[1200px] mx-auto">
       <h2 className="text-center uppercase font-bold underline mt-5">Products</h2>
